@@ -1,0 +1,22 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .class-label {
+    margin: 10px 0;
+  }
+  
+  .drop-down {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .btnStart {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
