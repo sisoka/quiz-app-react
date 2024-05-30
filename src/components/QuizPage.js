@@ -41,19 +41,27 @@ function QuizPage() {
     return url;
   };
 
-  const handleNextQuestion = (selectedAnswer) => {
+  const handleNextQuestion = () => {
+    const selectedInput = document.querySelector('input[name="answer"]:checked');
+    if (!selectedInput) {
+      alert('Please select an answer before proceeding.');
+      return;
+    }
+    
+    const selectedAnswer = selectedInput.value;
     const correctAnswer = questions[currentQuestionIndex].correct_answer;
-    setUserAnswers([...userAnswers, {
+    const updatedUserAnswers = [...userAnswers, {
       question: questions[currentQuestionIndex].question,
       selectedAnswer,
       correctAnswer,
       isCorrect: selectedAnswer === correctAnswer
-    }]);
+    }];
+    setUserAnswers(updatedUserAnswers);
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      localStorage.setItem('quizResults', JSON.stringify(userAnswers));
+      localStorage.setItem('quizResults', JSON.stringify(updatedUserAnswers));
       navigate('/results');
     }
   };
@@ -72,7 +80,7 @@ function QuizPage() {
           onNextQuestion={handleNextQuestion}
         />
         <div className="button-container">
-          <button className="next-button" onClick={() => handleNextQuestion(document.querySelector('input:checked').value)}>Next</button>
+          <button className="next-button" onClick={handleNextQuestion}>Next</button>
         </div>
       </div>
     </div>
